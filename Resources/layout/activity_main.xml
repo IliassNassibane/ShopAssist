@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:text="@string/ShopList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:id="@+id/shoplistbtn" />
+    <Button
+        android:text="@string/GropList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:id="@+id/groplistbtn"
+        android:layout_below="@id/shoplistbtn" />
+    <Button
+        android:text="@string/ShopMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:id="@+id/shopmapbtn"
+        android:layout_below="@id/groplistbtn" />
+    <Button
+        android:text="@string/GrocPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:id="@+id/shopplanbtn"
+        android:layout_below="@id/shopmapbtn" />
+</RelativeLayout>

@@ -1,0 +1,17 @@
+<resources>
+  <!-- General variables -->
+  <string name="app_name">ShopAssist</string>
+  <string name="action_settings">Settings</string>
+  <string name="backbtn-desc">...</string>
+  <string name="editbtn-desc">...</string>
+  
+  <!-- Hoofdscherm string variables -->
+  <string name="ShopList">Shoppinglist</string>
+  <string name="GropList">Grouplist</string>
+  <string name="GrocPlan">Shopping planner</string>
+  <string name="ShopMap">Shopping map</string>
+
+  <!-- Shoppinglist page variables -->
+  <string name="memberbtn-desc">...</string>
+  <string name="product-name">Product (TBD)</string>
+</resources>
