@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:columnCount="3"
+        android:rowCount="2">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <EditText
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ServerIPEditText"
+                android:hint="Server IP address" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <EditText
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ServerPortEditText"
+                android:hint="Port" />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:text="Listen"
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:id="@+id/ListenBtn"
+            android:layout_gravity="fill_vertical" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <EditText
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ClientIPEditText"
+                android:hint="Client IP address" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <EditText
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ClientPortEditText"
+                android:hint="Port" />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:text="Connect"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:id="@+id/ConnectBtn" />
+    </GridLayout>
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_weight="4"
+        android:id="@+id/ConsoleTextView"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:scrollbars="vertical" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:columnCount="2"
+        android:rowCount="1">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_gravity="fill">
+            <EditText
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/MessageEditText"
+                android:hint="Type message here..." />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:text="Send"
+            android:layout_width="100dp"
+            android:layout_height="0px"
+            android:id="@+id/SendBtn"
+            android:layout_gravity="fill_vertical" />
+    </GridLayout>
+</LinearLayout>

@@ -10,6 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAssist_JSON", "ShopAssist_Components\ShopAssist_JSONreader\ShopAssist_JSON.csproj", "{F7320722-3970-4F2B-9E72-478FEE50D8E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAssist_SQLite", "ShopAssist_Components\ShopAssist_SQLite\ShopAssist_SQLite.csproj", "{C1D47EA1-EA33-4EF3-8EC0-9ABD6303C539}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAssist_P2Pmodule", "ShopAssist_Components\ShopAssist_P2Pmodule\ShopAssist_P2Pmodule.csproj", "{F7F64D60-3556-476C-8D0F-2F0231734049}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +28,20 @@ Global
 		{BCBCE1D0-A476-4F3A-9FB2-E14D314EA526}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCBCE1D0-A476-4F3A-9FB2-E14D314EA526}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCBCE1D0-A476-4F3A-9FB2-E14D314EA526}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F7320722-3970-4F2B-9E72-478FEE50D8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7320722-3970-4F2B-9E72-478FEE50D8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7320722-3970-4F2B-9E72-478FEE50D8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7320722-3970-4F2B-9E72-478FEE50D8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D47EA1-EA33-4EF3-8EC0-9ABD6303C539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D47EA1-EA33-4EF3-8EC0-9ABD6303C539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D47EA1-EA33-4EF3-8EC0-9ABD6303C539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D47EA1-EA33-4EF3-8EC0-9ABD6303C539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F64D60-3556-476C-8D0F-2F0231734049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F64D60-3556-476C-8D0F-2F0231734049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F64D60-3556-476C-8D0F-2F0231734049}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F7F64D60-3556-476C-8D0F-2F0231734049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F64D60-3556-476C-8D0F-2F0231734049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F64D60-3556-476C-8D0F-2F0231734049}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

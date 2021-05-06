@@ -1,0 +1,11 @@
+{
+  "TestBericht": "Dit is een testbericht in een JSON bestand",
+  "NestedJson": {
+    "NestedJsonBericht": "Dit is een Nested testbericht"
+  },
+  "DubbelNestedJson": {
+    "NestedJson": {
+      "TestBericht": "Dit is een berichtin een dubbel nested"
+    }
+  }
+}

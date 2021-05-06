@@ -1,0 +1,166 @@
+﻿using Android.App;
+using Android.OS;
+using Android.Support.V7.App;
+using Android.Runtime;
+using Android.Widget;
+//using Java.Net; // ServerSocket
+using System.Threading;
+using System.Net;
+using System.Net.Sockets;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ShopAssist_P2Pmodule
+{
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    public class MainActivity : AppCompatActivity
+    {
+        // Voorbeeld uit: https://forums.xamarin.com/discussion/1576/need-simple-tcp-client-example
+
+        int i;
+        public static TcpClient client;
+        NetworkStream stream; //Create a NetworkStream (voor het ontvangen en versturen van data)
+        byte[] dataLength = new byte[4];
+        public static IPAddress localIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];
+        public static IPEndPoint ipLocalEndPoint = new IPEndPoint(localIP, 0);
+        int port = 5000;
+
+        TextView ipToConnectText;
+        Button buttonListen;
+        EditText IpAddressText;
+        Button buttonConnect;
+        TextView textViewConsole;
+        EditText messageText;
+        Button buttonSend;
+
+        // INIT
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            // Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.activity_main);
+
+            // Custom code en assignments:
+            ipToConnectText = FindViewById<TextView>(Resource.Id.IPToConnectText);
+            buttonListen = FindViewById<Button>(Resource.Id.ListenBtn);
+            IpAddressText = FindViewById<EditText>(Resource.Id.IpAddressText);
+            buttonConnect = FindViewById<Button>(Resource.Id.ConnectBtn);
+            buttonSend = FindViewById<Button>(Resource.Id.SendBtn);
+            textViewConsole = FindViewById<TextView>(Resource.Id.TextConsole);
+            messageText = FindViewById<EditText>(Resource.Id.MessageText);
+
+            ipToConnectText.Text = $"{localIP.ToString()}:{port}"; // IP van "Mobiel"
+
+            buttonConnect.Click += buttonConnect_Click;
+            buttonSend.Click += buttonSend_Click;
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        // Events
+        public void buttonConnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (buttonConnect.Text == "Connect")
+                {
+                    //client = new TcpClient(IPAddress.Parse("192.168.1.150").ToString(), port); // Dit is het adres waar de app naartoe stuurt.
+                    client = new TcpClient(IPAddress.Parse(IpAddressText.Text).ToString(), port);
+                    Toast.MakeText(this, "Connected", ToastLength.Short).Show();
+                    buttonConnect.Text = "Disconnect";
+                    textViewConsole.Text = null;
+                    buttonSend.Enabled = true;
+                    clientReceive();
+                }
+                else
+                {
+                    buttonConnect.Text = "Connect";
+                    Toast.MakeText(this, "Disconnected", ToastLength.Short).Show();
+                    client.GetStream().Close();
+                    client.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+            }
+        }
+
+        /// <summary>
+        /// Receives data from an active tcp connection and outputs it to a textview
+        /// </summary>
+        private void clientReceive()
+        {
+            if (client.Connected) {
+                try
+                {
+                    stream = client.GetStream();
+                    //byte[] data = new byte[BitConverter.ToInt32(dataLength, 0)];
+                    //stream.Read(data, 0, data.Length);
+
+                    byte[] Buffer = new byte[1024];
+
+                    new Thread(() => {
+                        while ((i = stream.Read(dataLength, 0, 4)) != 0) // Keeps trying to receive the size of the message or data
+                        {
+                            // Creates a byte stream for the data to be received
+                            byte[] data = new byte[BitConverter.ToInt32(dataLength, 0)];    // [] Dit mag naar een aparte data write
+                            // Receives the real data, not the size
+                            stream.Read(data, 0, data.Length); // [] naar een aparte write
+                            RunOnUiThread(() => textViewConsole.Text = textViewConsole.Text + (Encoding.ASCII.GetString(data)) + System.Environment.NewLine); 
+                            // Gaat niet mis bij "de", maar wel bij "5555"...
+                        }
+                    }).Start();
+                }
+                catch (Exception ex)
+                {
+                    Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+                }
+            }
+        }
+
+        void buttonSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (client.Connected)
+                {
+                    clientSend(messageText.Text); // uses the Function ClientSend and the msg as txtSend.Text
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+            }
+        }
+
+        /// <summary>
+        /// Sends a "message" through the TCP connection.
+        /// </summary>
+        /// <param name="msg"></param>
+        public void clientSend(string msg)
+        {
+            try
+            {
+                stream = client.GetStream();    // Gets the stream of the connection
+                byte[] data;                    // Creates a new byte without mentioning the size of it, because it's a byte used for sending
+                data = Encoding.Default.GetBytes(msg);  // Put the msg in the byte (it automatically uses the size of the msg)
+                int length = data.Length;       // Gets the length of the byte data
+                byte[] datalength = BitConverter.GetBytes(length);  // Put the length in a byte to send it
+                datalength = BitConverter.GetBytes(length); // Put the length in a byte to send it
+                stream.Write(datalength, 0, 4); // sends the data's length
+                stream.Write(data, 0, data.Length); // Sends the real data
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+            }
+        }
+    }
+}
